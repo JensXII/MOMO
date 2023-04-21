@@ -29,13 +29,16 @@ SetOpts(
   delayVersion = "original",
   delayFunction = NULL,
   delayVariance = FALSE,
-  MOMOgroups = list(`0to4` = "age >= 0 & age <=4", `5to14` = "age >= 5 & age <=14",
-    `15to64` = "age >= 15 & age <=64", `65P` = "age >= 65 | is.na(age)", Total =
-    "age >= 0 | is.na(age)"),
-  MOMOmodels = c(`0to4` = "LINE", `5to14` = "LINE", `15to64` = "LINE_SIN", `65P` =
-    "LINE_SIN", Total = "LINE_SIN"),
+  MOMOgroups = list(`0to14` = "age >=  0 & age <=  14", `15to44` =
+    "age >=  15 & age <=  44", `45to64` = "age >=  45 & age <=  64", `65to74` =
+    "age >=  65 & age <=  74", `75to84` = "age >=  75 & age <=  84", `65P` =
+    "age >=  65", `85P` = "age >=  85", Total = "age >=  0 | is.na(age)"),
+  MOMOmodels = c(`0to14` = "LINE", `15to44` = "LINE_SIN", `45to64` = "LINE_SIN", `65to74`
+    = "LINE_SIN", `75to84` = "LINE_SIN", `65P` = "LINE_SIN", `85P` = "LINE_SIN", Total =
+    "LINE_SIN"),
   Ydrop = 9999,
   Wdrop = 99,
+  DropPeriods = "(2020 <= YoDi) & (YoDi <= 2022)",
   verbose = TRUE
 )
 }
@@ -44,9 +47,9 @@ SetOpts(
 
 \item{DoPR}{Date of start of a regular MOMO registration (see specifications). Provided in ISO format, i.e. YYYY-MM-DD.}
 
-\item{WStart}{Week of cumulative excess start. e.g. "influenza season" as define by EISS will be defined as WStart = 40, WEnd= 20. e.g. summer could be defined as WStart = 26, WEnd= 40}
+\item{WStart}{Week of cumulative excess start. e.g. "influenza season" as define by EISS will be defined as WStart = 40, WEnd = 20. e.g. summer could be defined as WStart = 26, WEnd =  40}
 
-\item{WEnd}{Week of cumulative excess end e.g. "influenza season" as define by EISS will be defined as WStart = 40, WEnd= 20.}
+\item{WEnd}{Week of cumulative excess end e.g. "influenza season" as define by EISS will be defined as WStart = 40, WEnd = 20.}
 
 \item{country}{Country name}
 
@@ -95,6 +98,8 @@ SetOpts(
 \item{Ydrop}{Year after which data are not included in the baseline estimation}
 
 \item{Wdrop}{Week of Ydrop after which data are not included in the baseline estimation}
+
+\item{DropPeriods}{Periods to be excluded for the baseline estimation}
 
 \item{verbose}{Printing out information}
 }

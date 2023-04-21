@@ -2,6 +2,10 @@
 
 # News
 
+## MOMO 2023.04.19
+
+Included the DropPeriods option for excluding periods to be included in the baseline estimation.
+
 ## MOMO 2020.9.3
 
 Spring weeks of 2020, COVID-19, permanently excluded from baseline estimation

@@ -29,7 +29,8 @@ analyzeMOMOgroup <- function(mi, group, version="v4-3", datesISO=TRUE, useAUTOMN
   dataExport$aggr_fullDelay <- aggr_fullDelay
   aggr_delay <- trimDelayMOMO(aggr_fullDelay)
   dataExport$aggr_delay <- aggr_delay
-  final <- excessMOMO(aggr=aggr_delay, version, useAUTOMN, USEglm2, zvalue)
+
+  final <- excessMOMO(aggr = aggr_delay, version, useAUTOMN, USEglm2, zvalue)
 
   n <- names(final)
   extraVars <- n[stringr::str_detect(n,"^pred")]
@@ -63,4 +64,3 @@ analyzeMOMOgroup <- function(mi, group, version="v4-3", datesISO=TRUE, useAUTOMN
     toSave=toSave))
 
 }
-

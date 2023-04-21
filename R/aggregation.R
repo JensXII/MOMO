@@ -4,8 +4,8 @@
 # created by Bernadette Gergonne, SSI-EpiLife for Euro MOMO.
 # Port to R and further development by Theodore Lytras <thlytras@gmail.com>
 #' @import stats
-aggregateMOMO <- function(mi, group, compatibility.mode=FALSE) {
-  # We make the AGGREGATION by week of death
+aggregateMOMO <- function(mi, group, compatibility.mode = FALSE) {
+
   aggr1 <- aggregate(mi[,c("nb", "nb2", colnames(mi)[grep("WR", colnames(mi), fixed=TRUE)])], by=mi[,c("YoDi","WoDi")], sum, na.rm=TRUE)
   aggr1 <- aggr1[order(aggr1$YoDi, aggr1$WoDi),]
 
@@ -113,4 +113,3 @@ aggregateMOMO <- function(mi, group, compatibility.mode=FALSE) {
   aggr5[aggr5$wk>=(momoAttr$WEEK - momoAttr$histPer) & aggr5$wk<=(momoAttr$WEEK+1), ]
 
 }
-

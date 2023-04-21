@@ -5,11 +5,10 @@
 # Ported into R by Theodore Lytras <thlytras@gmail.com>
 
 #' @import glm2
-excessMOMO <- function(aggr, version, useAUTOMN, USEglm2, zvalue=1.96) {
-  #aggr <- readRDS(aggr)
+#' @import data.table
+excessMOMO <- function(aggr, version, useAUTOMN, USEglm2, zvalue = 1.96) {
+
   momoAttr$version <- version
-  #temp <- cbind(aggr, lspline(aggr$wk, nknots=2, names=c("Swk1", "Swk2", "Swk3")))
-  #aggr <- transferMOMOattributes(temp, aggr)
 
   # DEFINITION OF SPRING AND AUTUMN
   momoAttr$SPRING <- c(15, 26)
@@ -23,9 +22,9 @@ excessMOMO <- function(aggr, version, useAUTOMN, USEglm2, zvalue=1.96) {
   }
 
   aggr <- aggr[order(aggr$season, aggr$YoDi, aggr$WoDi),]
-  aggr$Sweek <- unlist(lapply(table(aggr$season), function(x)1:x))
-  aggr$sin <- sin(2*pi*aggr$wk/52.18)
-  aggr$cos <- cos(2*pi*aggr$wk/52.18)
+  aggr$Sweek <- unlist(lapply(table(aggr$season), function(x) 1:x))
+  aggr$sin <- sin(2*pi*aggr$wk/(365.25/7))
+  aggr$cos <- cos(2*pi*aggr$wk/(365.25/7))
 
   # generation model and indicators of excess
   aggr$excess <- NA
@@ -38,61 +37,73 @@ excessMOMO <- function(aggr, version, useAUTOMN, USEglm2, zvalue=1.96) {
   aggr$UCIe <- NA
   aggr$LCIe <- NA
 
+  # Add population
+  if (opts$country == "Denmark") {
+    aggr <- data.table::data.table(merge(aggr, readRDS("DKpop.RDS"), by = c("GROUP", "YoDi", "WoDi"), all.x = TRUE))
+    aggr[is.na(N), N := 1]
+    aggr <- as.data.frame(aggr)
+  } else {
+    aggr$N <- 1
+  }
 
   # we do not use data before WWW week before the Drop date
   # for modelling baseline without the influence of A-FLU
   momoAttr$DROP <- aggr$wk[aggr$YoDi == opts$Ydrop & aggr$WoDi == opts$Wdrop]
   # momoAttr$DROP <- aggr$wk[aggr$YoDi == momoAttr$Ydrop & aggr$WoDi == momoAttr$Wdrop]
 
-
   # Conditions for modelling
   # We remove "winter" and "summer"...actually we keep spring and autumn
-  # aggr$COND3[((momoAttr$SPRING[1] < aggr$WoDi) & (aggr$WoDi < momoAttr$SPRING[2])) | ((momoAttr$AUTUMN[1] < aggr$WoDi) & (aggr$WoDi<momoAttr$AUTUMN[2]))] <- 1
+  aggr$COND3[((momoAttr$SPRING[1] < aggr$WoDi) & (aggr$WoDi < momoAttr$SPRING[2])) | ((momoAttr$AUTUMN[1] < aggr$WoDi) & (aggr$WoDi < momoAttr$AUTUMN[2]))] <- 1
   # Exclude spring 2020 - 2020-09-03 Jens & Sarah
-  aggr$COND3[((momoAttr$SPRING[1] < aggr$WoDi) & (aggr$WoDi < momoAttr$SPRING[2]) & (aggr$YoDi != 2020)) | ((momoAttr$AUTUMN[1] < aggr$WoDi) & (aggr$WoDi<momoAttr$AUTUMN[2]))] <- 1
-  # We remove the previous weeks if there is no unusual excess observed
+  # aggr$COND3[(opts$country != "Denmark") & (((momoAttr$SPRING[1] < aggr$WoDi) & (aggr$WoDi < momoAttr$SPRING[2]) & (aggr$YoDi != 2020)) | ((momoAttr$AUTUMN[1] < aggr$WoDi) & (aggr$WoDi<momoAttr$AUTUMN[2])))] <- 1
+  # Exclude spring 2020 and autumn 2021 if country = Denmark - 2022-12-09 Jens
+  # aggr$COND3[(opts$country == "Denmark") & (((momoAttr$SPRING[1] < aggr$WoDi) & (aggr$WoDi < momoAttr$SPRING[2]) & (aggr$YoDi != 2020)) | ((momoAttr$AUTUMN[1] < aggr$WoDi) & (aggr$WoDi<momoAttr$AUTUMN[2]) & (aggr$YoDi != 2021)))] <- 1
+
+  # Exclude DropPeriods - 2023-04-19 Jens
+  if (!is.null(opts$DropPeriods)) aggr$COND3[with(aggr, eval(parse(text = opts$DropPeriods)))] <- NA
+
+  # remove the previous weeks if there is no unusual excess observed
   aggr$COND4 <- as.integer(aggr$YoDi < opts$Ydrop | (aggr$YoDi == opts$Ydrop & aggr$WoDi < opts$Wdrop))
   # aggr$COND4 <- as.integer(aggr$YoDi < momoAttr$Ydrop | (aggr$YoDi==momoAttr$Ydrop & aggr$WoDi<momoAttr$Wdrop))
-  #we remove the period with delay
+  # remove the period with delay
   aggr$COND5[aggr$wk < momoAttr$WEEK2] <- 1
-  # we keep only valid historical data
+  # keep only valid historical data
   aggr$COND6[(aggr$wk > momoAttr$WEEK - momoAttr$histPer) & (aggr$wk <= momoAttr$WEEK)] <- 1
 
   aggr$CONDmodel[with(aggr, COND3==1 & COND4==1 & COND5==1 & COND6==1)] <- 1
   aggr$CONDpred[aggr$COND6 == 1] <- 1
 
-
   # DETECTION OF ANY EXCESS adapted Serfling MODEL
 
   # Use glm2() if package glm2 is available, in order to improve convergence properties
   # (This is equivalent to the option irls in stata glm)
-  glmToUse <- c("glm", "glm2")[(USEglm2)+1]
+  glmToUse <- c("glm", "glm2")[(USEglm2) + 1]
 
   if (momoAttr$model=="LINE") {
-    m1 <- do.call(glmToUse, list(nbc ~ wk, data=subset(aggr, CONDmodel==1), family=poisson))
+    m1 <- do.call(glmToUse, list(nbc ~ wk + offset(log(N)), data = subset(aggr, CONDmodel==1), family = poisson))
     od <- max(1,sum(m1$weights * m1$residuals^2)/m1$df.r)
-    if (od > 1) m1 <- do.call(glmToUse, list(nbc ~ wk, data=subset(aggr, CONDmodel==1), family=quasipoisson))
+    if (od > 1) m1 <- do.call(glmToUse, list(nbc ~ wk + offset(log(N)), data = subset(aggr, CONDmodel==1), family = quasipoisson))
     aggr$Model <- "LINE"
   }
 
   if (momoAttr$model=="SPLINE") {
-    m1 <- do.call(glmToUse, list(nbc ~ Swk1 + Swk2 + Swk3, data=subset(aggr, CONDmodel==1), family=poisson))
+    m1 <- do.call(glmToUse, list(nbc ~ Swk1 + Swk2 + Swk3 + offset(log(N)), data=subset(aggr, CONDmodel==1), family=poisson))
     od <- max(1,sum(m1$weights * m1$residuals^2)/m1$df.r)
-    if (od > 1) m1 <- do.call(glmToUse, list(nbc ~ Swk1 + Swk2 + Swk3, data=subset(aggr, CONDmodel==1), family=quasipoisson))
+    if (od > 1) m1 <- do.call(glmToUse, list(nbc ~ Swk1 + Swk2 + Swk3 + offset(log(N)), data=subset(aggr, CONDmodel==1), family=quasipoisson))
     aggr$Model <- "SPLINES"
   }
 
   if (momoAttr$model=="LINE_SIN") {
-    m1 <- do.call(glmToUse, list(nbc ~ sin + cos + wk, data=subset(aggr, CONDmodel==1), family=poisson))
+    m1 <- do.call(glmToUse, list(nbc ~ sin + cos + wk + offset(log(N)), data=subset(aggr, CONDmodel==1), family=poisson))
     od <- max(1,sum(m1$weights * m1$residuals^2)/m1$df.r)
-    if (od > 1) m1 <- do.call(glmToUse, list(nbc ~ sin + cos + wk, data=subset(aggr, CONDmodel==1), family=quasipoisson))
+    if (od > 1) m1 <- do.call(glmToUse, list(nbc ~ sin + cos + wk + offset(log(N)), data=subset(aggr, CONDmodel==1), family=quasipoisson))
     aggr$Model <- "LINES_SIN"
   }
 
   if (momoAttr$model=="SPLINE_SIN") {
-    m1 <- do.call(glmToUse, list(nbc ~ sin + cos + Swk1 + Swk2 + Swk3, data=subset(aggr, CONDmodel==1), family=poisson))
+    m1 <- do.call(glmToUse, list(nbc ~ sin + cos + Swk1 + Swk2 + Swk3 + offset(log(N)), data=subset(aggr, CONDmodel==1), family=poisson))
     od <- max(1,sum(m1$weights * m1$residuals^2)/m1$df.r)
-    if (od > 1) m1 <- do.call(glmToUse, list(nbc ~ sin + cos + Swk1 + Swk2 + Swk3, data=subset(aggr, CONDmodel==1), family=quasipoisson))
+    if (od > 1) m1 <- do.call(glmToUse, list(nbc ~ sin + cos + Swk1 + Swk2 + Swk3 + offset(log(N)), data=subset(aggr, CONDmodel==1), family=quasipoisson))
     aggr$Model <- "SPLINES_SIN"
   }
 
@@ -207,11 +218,11 @@ excessMOMO <- function(aggr, version, useAUTOMN, USEglm2, zvalue=1.96) {
 
   # we save the FINAL DATA SET
   ret <- aggr[,c("Version", "Model", "GROUP", "WoDi", "YoDi", "wk", "wk2",
-    "season", "Sweek", "nb", "nb2", "nbr", "nbc", "UCIc", "LCIc", "UPIc", "LPIc", "Pnb",
-    names(aggr)[grep("UPIb", names(aggr), fixed=TRUE)], "LCIb", "UCIb", "excess",
-    "UCIe", "LCIe", "resi", "zscore", "DOTm", "DOTc", "DOTb", "DOTz", "DOTzm",
-    "COND6", "CONDmodel", "Spring", c("Autumn","Automn")[useAUTOMN+1],
-    "CUSUM", "FLAG", "k", "ARL0", "h",extraVarList)]
+                 "season", "Sweek", "nb", "nb2", "nbr", "nbc", "UCIc", "LCIc", "UPIc", "LPIc", "Pnb",
+                 names(aggr)[grep("UPIb", names(aggr), fixed=TRUE)], "LCIb", "UCIb", "excess",
+                 "UCIe", "LCIe", "resi", "zscore", "DOTm", "DOTc", "DOTb", "DOTz", "DOTzm",
+                 "COND6", "CONDmodel", "Spring", c("Autumn","Automn")[useAUTOMN+1],
+                 "CUSUM", "FLAG", "k", "ARL0", "h",extraVarList)]
   #transferMOMOattributes(ret, aggr)
   return(ret)
 }

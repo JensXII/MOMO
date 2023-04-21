@@ -31,8 +31,6 @@ opts$DoA <- as.Date("2015-8-10")
 # (Provided in ISO format, i.e. YYYY-MM-DD)
 opts$DoPR <- as.Date("2008-1-1")
 
-
-
 # COMPARISON of CUMULATIVE EXCESS
 # Chose the period of interest:
 # Week of start and Week of end of the period to study EVERY YEAR or "SEASON"
@@ -123,14 +121,14 @@ opts$delayVariance <- FALSE
 # and can overlap if needed.
 
 opts$MOMOgroups <- list(
-                  "0to14" = "0 <= age & age <= 14",
-                  "15to44" = "15 <= age & age <= 44",
-                  "45to64" = "45 <= age & age <= 64",
-                  "65P" = "age >= 65 & !is.na(age)",
-                  "65to74" = "65 <= age & age <= 74",
-                  "75to84" = "75 <= age & age <= 84",
-                  "85P" = "age >= 85 & !is.na(age)",
-                  "Total" = "age >= 0 | is.na(age)"
+  "0to14" = "0 <= age & age <= 14",
+  "15to44" = "15 <= age & age <= 44",
+  "45to64" = "45 <= age & age <= 64",
+  "65P" = "age >= 65 & !is.na(age)",
+  "65to74" = "65 <= age & age <= 74",
+  "75to84" = "75 <= age & age <= 84",
+  "85P" = "age >= 85 & !is.na(age)",
+  "Total" = "age >= 0 | is.na(age)"
 )
 
 # Names in the following vector should correspond to the groups above,
@@ -150,3 +148,5 @@ opts$MOMOmodels <- c(
 
 opts$Ydrop <- 9999
 opts$Wdrop <- 99
+
+opts$DropPeriods <- NULL

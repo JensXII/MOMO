@@ -11,15 +11,15 @@ The master start button for running all of the MoMo code. \code{\link{SetOpts}} 
 }
 \examples{
 SetOpts(
-  DoA=as.Date("2013-12-31"),
-  DoPR=as.Date("2008-1-1"),
-  WStart=1,
-  WEnd=52,
+  DoA = as.Date("2013-12-31"),
+  DoPR = as.Date("2008-1-1"),
+  WStart = 1,
+  WEnd = 52,
   country = "Denmark",
   source = "SSI",
   MFILE = "DoD_DoR.txt",
   HFILE = "holidays.txt",
-  INPUTDIR = system.file("testdata",package="MOMO"),
+  INPUTDIR = system.file("testdata",package = "MOMO"),
   WDIR = tempdir(),
   back = 3,
   WWW = 290,
