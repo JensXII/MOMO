@@ -1,6 +1,6 @@
 Package: MOMO
 Title: MOMOpack for R
-Version: 2023.04.20
+Version: 2023.05.08
 Authors@R: c(
   person("Theodore", "Lytras", email = "thlytras@gmail.com", role = c("aut", "trl")),
   person("Richard", "White", email = "w@rwhite.no", role = c("aut")),
@@ -8,7 +8,7 @@ Authors@R: c(
   person("Jens", "Nielsen", email = "nls@ssi.dk", role = c("aut", "cre")))
 Description: This is a full port of A-MOMOpack (the code used to analyze mortality data for the EuroMOMO project) from Stata to R.
 Note: Originally MOMOpack V 4.3 for Stata, created by Bernadette Gergonne, EpiLife. Translated into R and further development by Theodore Lytras. Converted into R package by Richard White.
-Depends: R (>= 3.5)
+Depends: R (>= 3.6)
 Imports:
   data.table,
   foreign,
@@ -18,7 +18,6 @@ Imports:
   graphics,
   utils,
   glm2,
-  MASS,
   lubridate,
   readxl,
   ggplot2,

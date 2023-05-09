@@ -38,7 +38,7 @@ excessMOMO <- function(aggr, version, useAUTOMN, USEglm2, zvalue = 1.96) {
   aggr$LCIe <- NA
 
   # Add population
-  if (opts$country == "Denmark") {
+  if (opts$country == "Danmark") {
     aggr <- data.table::data.table(merge(aggr, readRDS("DKpop.RDS"), by = c("GROUP", "YoDi", "WoDi"), all.x = TRUE))
     aggr[is.na(N), N := 1]
     aggr <- as.data.frame(aggr)

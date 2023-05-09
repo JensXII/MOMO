@@ -29,58 +29,52 @@
 #' @param MOMOmodels Names in the following vector should correspond to the MOMOgroups and the corresponding values (model to use for each group) should be one of "LINE", "SPLINE", "LINE_SIN", "SPLINE_SIN"
 #' @param Ydrop Year after which data are not included in the baseline estimation
 #' @param Wdrop Week of Ydrop after which data are not included in the baseline estimation
-#' @param DropPeriods Periods to be excluded for the baseline estimation
+#' @param DropPeriods Periods excluded from baseline estimation
 #' @param verbose Printing out information
 #' @export SetOpts
 SetOpts <- function(
-    DoA = as.Date("2015-8-10"),
-    DoPR = as.Date("2008-1-1"),
-    WStart = 1,
-    WEnd = 52,
-    country = "Greece",
-    source = "UoP",
-    MFILE = "greece_m.dta",
-    HFILE = "holidayfilegreece.dta",
-    INPUTDIR = "./input",
-    MDATA = NULL,
-    HDATA = NULL,
-    WDIR = "./output",
-    back = 3,
-    WWW = 290,
-    Ysum = 2009,
-    Wsum = 34,
-    USEglm2 = TRUE,
-    useAUTOMN = TRUE,
-    datesISO = FALSE,
-    plotGraphs = TRUE,
-    removeDataAfterDoA = TRUE,
-    delayVersion = "original",
-    delayFunction = NULL,
-    delayVariance = FALSE,
-    MOMOgroups = list(
-      "0to14" = "age >=  0 & age <=  14",
-      "15to44" = "age >=  15 & age <=  44",
-      "45to64" = "age >=  45 & age <=  64",
-      "65to74" = "age >=  65 & age <=  74",
-      "75to84" = "age >=  75 & age <=  84",
-      "65P" = "age >=  65",
-      "85P" = "age >=  85",
-      "Total" = "age >=  0 | is.na(age)"
-    ),
-    MOMOmodels = c(
-      "0to14" = "LINE",
-      "15to44" = "LINE_SIN",
-      "45to64" = "LINE_SIN",
-      "65to74" = "LINE_SIN",
-      "75to84" = "LINE_SIN",
-      "65P" = "LINE_SIN",
-      "85P" = "LINE_SIN",
-      "Total" = "LINE_SIN"
-    ),
-    Ydrop = 9999,
-    Wdrop = 99,
-    DropPeriods = "(2020 <= YoDi) & (YoDi <= 2022)",
-    verbose = TRUE){
+  DoA=as.Date("2015-8-10"),
+  DoPR=as.Date("2008-1-1"),
+  WStart=1,
+  WEnd=52,
+  country = "Greece",
+  source = "UoP",
+  MFILE = "greece_m.dta",
+  HFILE = "holidayfilegreece.dta",
+  INPUTDIR = "./input",
+  MDATA = NULL,
+  HDATA = NULL,
+  WDIR = "./output",
+  back = 3,
+  WWW = 290,
+  Ysum = 2009,
+  Wsum = 34,
+  USEglm2 = TRUE,
+  useAUTOMN = TRUE,
+  datesISO = FALSE,
+  plotGraphs = TRUE,
+  removeDataAfterDoA = TRUE,
+  delayVersion = "original",
+  delayFunction = NULL,
+  delayVariance = FALSE,
+  MOMOgroups = list(
+    "0to4" =  "age >= 0 & age <=4",
+    "5to14" = "age >= 5 & age <=14",
+    "15to64" = "age >= 15 & age <=64",
+    "65P" = "age >= 65 | is.na(age)",
+    "Total" = "age >= 0 | is.na(age)"
+  ),
+  MOMOmodels = c(
+    "0to4" = "LINE",
+    "5to14" = "LINE",
+    "15to64" = "LINE_SIN",
+    "65P" = "LINE_SIN",
+    "Total" = "LINE_SIN"
+  ),
+  Ydrop = 9999,
+  Wdrop = 99,
+  DropPeriods = NULL,
+  verbose=TRUE){
 
   if(!delayVersion %in% opts$delayVersionAvailable) stop("delayVersion not 'original' or '2017-12'")
 
@@ -209,7 +203,7 @@ RunMoMo <- function(){
                                WStart = opts$WStart, WEnd = opts$WEnd, Ysum = opts$Ysum, Wsum = opts$Wsum,
                                groups = opts$MOMOgroups, models = opts$MOMOmodels, delayCorr = opts$back, histPer = opts$WWW,
                                compatibility.mode = TRUE)
-    if (opts$country == "Denmark") {
+    if (opts$country == "Danmark") {
       if (opts$verbose) cat(" DKpopulation... ")
       saveRDS(DKpop(opts$MOMOgroups), "DKpop.RDS")
     }

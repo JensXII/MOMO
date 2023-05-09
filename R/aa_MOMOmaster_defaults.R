@@ -148,5 +148,4 @@ opts$MOMOmodels <- c(
 
 opts$Ydrop <- 9999
 opts$Wdrop <- 99
-
 opts$DropPeriods <- NULL

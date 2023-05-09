@@ -10,3 +10,5 @@ test.RDS
 CONTRIBUTING.md
 CONTRIBUTING.pdf
 inst/benchmarkdelay/
+inst/testdata/
+DKpop.RDS

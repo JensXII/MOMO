@@ -1,4 +1,6 @@
 .Rproj.user
 .Rhistory
 inst/benchmarkdelay/
-.DS_Store
+DKpop.RDS
+inst/testdata/
+**/.DS_Store

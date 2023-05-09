@@ -2,9 +2,9 @@
 
 # News
 
-## MOMO 2023.04.19
+## MOMO 2023.05.08
 
-Included the DropPeriods option for excluding periods to be included in the baseline estimation.
+Included the DropPeriods option for periods to be excluded in the baseline estimation.
 
 ## MOMO 2020.9.3
 

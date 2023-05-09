@@ -1,3 +1,7 @@
+## MOMO 2023.05.08
+
+Exclusion of the COVID-19 pandemic years, 2020-2022, from baseline estimation
+
 ## MOMO 2020.9.3
 
 Spring weeks of 2020, COVID-19, permanently excluded from baseline estimation
