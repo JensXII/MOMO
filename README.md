@@ -6,6 +6,9 @@
 
 Included the DropPeriods option for periods to be excluded in the baseline estimation.
 
+Install latest version: devtools::install_github("JensXII/MOMO")
+Install original version: devtools::install_github("JensXII/MOMO", ref = "2020.4.17")
+
 ## MOMO 2020.9.3
 
 Spring weeks of 2020, COVID-19, permanently excluded from baseline estimation
