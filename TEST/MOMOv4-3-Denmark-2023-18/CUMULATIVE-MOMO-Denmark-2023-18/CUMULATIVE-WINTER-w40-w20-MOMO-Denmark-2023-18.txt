@@ -1,0 +1,73 @@
+"Version"	"Group"	"Model"	"Indicator"	"v1"	"v2"	"v3"	"v4"	"v5"	"v6"	"v7"	"v8"
+"v4-3"	"00to14"	"LINE"	"Year of Period Start"	2015	2016	2017	2018	2019	2020	2021	2022
+"v4-3"	"00to14"	"LINE"	"Week of Period Start"	40	40	40	40	40	40	40	40
+"v4-3"	"00to14"	"LINE"	"Year of Period End"	2016	2017	2018	2019	2020	2021	2022	2023
+"v4-3"	"00to14"	"LINE"	"Week of Period End"	20	20	20	20	20	20	20	20
+"v4-3"	"00to14"	"LINE"	"Duration of the Study Period"	34	33	33	33	33	34	33	31
+"v4-3"	"00to14"	"LINE"	"Total number of deaths"	360	363	365	325	346	349	366	326
+"v4-3"	"00to14"	"LINE"	"Expected number of death (baseline)"	383	364	357	350	343	346	330	304
+"v4-3"	"00to14"	"LINE"	"Crude variation around the baseline"	-23	-1	8	-25	3	3	36	22
+"v4-3"	"00to14"	"LINE"	"Standardised variation around the baseline (Zscore)"	-1.44	-0.57	0.15	-1.55	-0.06	-0.11	1.78	0.93
+"v4-3"	"15to44"	"LINE"	"Year of Period Start"	2015	2016	2017	2018	2019	2020	2021	2022
+"v4-3"	"15to44"	"LINE"	"Week of Period Start"	40	40	40	40	40	40	40	40
+"v4-3"	"15to44"	"LINE"	"Year of Period End"	2016	2017	2018	2019	2020	2021	2022	2023
+"v4-3"	"15to44"	"LINE"	"Week of Period End"	20	20	20	20	20	20	20	20
+"v4-3"	"15to44"	"LINE"	"Duration of the Study Period"	34	33	33	33	33	34	33	31
+"v4-3"	"15to44"	"LINE"	"Total number of deaths"	868	808	823	799	728	779	742	693
+"v4-3"	"15to44"	"LINE"	"Expected number of death (baseline)"	816	785	778	771	764	780	751	699
+"v4-3"	"15to44"	"LINE"	"Crude variation around the baseline"	52	23	45	28	-36	-1	-9	-7
+"v4-3"	"15to44"	"LINE"	"Standardised variation around the baseline (Zscore)"	1.39	0.56	1.38	0.72	-1.37	-0.31	-0.49	-0.31
+"v4-3"	"45to64"	"LINES_SIN"	"Year of Period Start"	2015	2016	2017	2018	2019	2020	2021	2022
+"v4-3"	"45to64"	"LINES_SIN"	"Week of Period Start"	40	40	40	40	40	40	40	40
+"v4-3"	"45to64"	"LINES_SIN"	"Year of Period End"	2016	2017	2018	2019	2020	2021	2022	2023
+"v4-3"	"45to64"	"LINES_SIN"	"Week of Period End"	20	20	20	20	20	20	20	20
+"v4-3"	"45to64"	"LINES_SIN"	"Duration of the Study Period"	34	33	33	33	33	34	33	31
+"v4-3"	"45to64"	"LINES_SIN"	"Total number of deaths"	5132	4852	4885	4572	4471	4479	4541	4015
+"v4-3"	"45to64"	"LINES_SIN"	"Expected number of death (baseline)"	4912	4695	4621	4548	4476	4534	4334	4014
+"v4-3"	"45to64"	"LINES_SIN"	"Crude variation around the baseline"	220	157	264	24	-5	-55	207	2
+"v4-3"	"45to64"	"LINES_SIN"	"Standardised variation around the baseline (Zscore)"	2.66	2	3.37	0.07	-0.14	-0.84	2.71	-0.07
+"v4-3"	"65P"	"LINES_SIN"	"Year of Period Start"	2015	2016	2017	2018	2019	2020	2021	2022
+"v4-3"	"65P"	"LINES_SIN"	"Week of Period Start"	40	40	40	40	40	40	40	40
+"v4-3"	"65P"	"LINES_SIN"	"Year of Period End"	2016	2017	2018	2019	2020	2021	2022	2023
+"v4-3"	"65P"	"LINES_SIN"	"Week of Period End"	20	20	20	20	20	20	20	20
+"v4-3"	"65P"	"LINES_SIN"	"Duration of the Study Period"	34	33	33	33	33	34	33	31
+"v4-3"	"65P"	"LINES_SIN"	"Total number of deaths"	30752	31022	32613	31279	31692	33605	35772	32943
+"v4-3"	"65P"	"LINES_SIN"	"Expected number of death (baseline)"	29684	29476	30106	30749	31407	33025	32793	31507
+"v4-3"	"65P"	"LINES_SIN"	"Crude variation around the baseline"	1068	1546	2507	530	285	580	2979	1437
+"v4-3"	"65P"	"LINES_SIN"	"Standardised variation around the baseline (Zscore)"	4.81	6.83	10.93	2.16	1.25	2.1	12.62	5.98
+"v4-3"	"65to74"	"LINES_SIN"	"Year of Period Start"	2015	2016	2017	2018	2019	2020	2021	2022
+"v4-3"	"65to74"	"LINES_SIN"	"Week of Period Start"	40	40	40	40	40	40	40	40
+"v4-3"	"65to74"	"LINES_SIN"	"Year of Period End"	2016	2017	2018	2019	2020	2021	2022	2023
+"v4-3"	"65to74"	"LINES_SIN"	"Week of Period End"	20	20	20	20	20	20	20	20
+"v4-3"	"65to74"	"LINES_SIN"	"Duration of the Study Period"	34	33	33	33	33	34	33	31
+"v4-3"	"65to74"	"LINES_SIN"	"Total number of deaths"	7673	7565	7660	7569	7437	7546	7461	6716
+"v4-3"	"65to74"	"LINES_SIN"	"Expected number of death (baseline)"	7381	7132	7101	7071	7041	7225	6981	6526
+"v4-3"	"65to74"	"LINES_SIN"	"Crude variation around the baseline"	292	433	559	498	396	321	480	189
+"v4-3"	"65to74"	"LINES_SIN"	"Standardised variation around the baseline (Zscore)"	3	4.52	5.91	5.25	4.3	3.26	5.12	2.01
+"v4-3"	"75to84"	"LINES_SIN"	"Year of Period Start"	2015	2016	2017	2018	2019	2020	2021	2022
+"v4-3"	"75to84"	"LINES_SIN"	"Week of Period Start"	40	40	40	40	40	40	40	40
+"v4-3"	"75to84"	"LINES_SIN"	"Year of Period End"	2016	2017	2018	2019	2020	2021	2022	2023
+"v4-3"	"75to84"	"LINES_SIN"	"Week of Period End"	20	20	20	20	20	20	20	20
+"v4-3"	"75to84"	"LINES_SIN"	"Duration of the Study Period"	34	33	33	33	33	34	33	31
+"v4-3"	"75to84"	"LINES_SIN"	"Total number of deaths"	10458	10536	11367	11000	11392	12392	13437	12802
+"v4-3"	"75to84"	"LINES_SIN"	"Expected number of death (baseline)"	10191	10322	10747	11189	11649	12481	12641	12392
+"v4-3"	"75to84"	"LINES_SIN"	"Crude variation around the baseline"	267	214	620	-189	-257	-89	796	410
+"v4-3"	"75to84"	"LINES_SIN"	"Standardised variation around the baseline (Zscore)"	2.2	1.6	4.81	-1.66	-2.04	-0.89	5.75	2.82
+"v4-3"	"85P"	"LINES_SIN"	"Year of Period Start"	2015	2016	2017	2018	2019	2020	2021	2022
+"v4-3"	"85P"	"LINES_SIN"	"Week of Period Start"	40	40	40	40	40	40	40	40
+"v4-3"	"85P"	"LINES_SIN"	"Year of Period End"	2016	2017	2018	2019	2020	2021	2022	2023
+"v4-3"	"85P"	"LINES_SIN"	"Week of Period End"	20	20	20	20	20	20	20	20
+"v4-3"	"85P"	"LINES_SIN"	"Duration of the Study Period"	34	33	33	33	33	34	33	31
+"v4-3"	"85P"	"LINES_SIN"	"Total number of deaths"	12621	12921	13586	12710	12863	13667	14874	13449
+"v4-3"	"85P"	"LINES_SIN"	"Expected number of death (baseline)"	12117	12015	12248	12486	12728	13355	13242	12702
+"v4-3"	"85P"	"LINES_SIN"	"Crude variation around the baseline"	504	906	1338	224	135	312	1632	747
+"v4-3"	"85P"	"LINES_SIN"	"Standardised variation around the baseline (Zscore)"	3.98	7.08	10.12	1.61	1.04	1.96	12.2	5.5
+"v4-3"	"Total"	"LINES_SIN"	"Year of Period Start"	2015	2016	2017	2018	2019	2020	2021	2022
+"v4-3"	"Total"	"LINES_SIN"	"Week of Period Start"	40	40	40	40	40	40	40	40
+"v4-3"	"Total"	"LINES_SIN"	"Year of Period End"	2016	2017	2018	2019	2020	2021	2022	2023
+"v4-3"	"Total"	"LINES_SIN"	"Week of Period End"	20	20	20	20	20	20	20	20
+"v4-3"	"Total"	"LINES_SIN"	"Duration of the Study Period"	34	33	33	33	33	34	33	31
+"v4-3"	"Total"	"LINES_SIN"	"Total number of deaths"	37112	37045	38686	36975	37237	39212	41421	37954
+"v4-3"	"Total"	"LINES_SIN"	"Expected number of death (baseline)"	35760	35300	35849	36407	36973	38659	38161	36452
+"v4-3"	"Total"	"LINES_SIN"	"Crude variation around the baseline"	1352	1745	2837	568	264	553	3260	1502
+"v4-3"	"Total"	"LINES_SIN"	"Standardised variation around the baseline (Zscore)"	5.78	7.42	11.88	2.18	1.11	1.93	13.39	6.08

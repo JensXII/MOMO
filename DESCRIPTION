@@ -8,7 +8,7 @@ Authors@R: c(
   person("Jens", "Nielsen", email = "nls@ssi.dk", role = c("aut", "cre")))
 Description: This is a full port of A-MOMOpack (the code used to analyze mortality data for the EuroMOMO project) from Stata to R.
 Note: Originally MOMOpack V 4.3 for Stata, created by Bernadette Gergonne, EpiLife. Translated into R and further development by Theodore Lytras. Converted into R package by Richard White.
-Depends: R (>= 3.6)
+Depends: R (>= 3.5)
 Imports:
   data.table,
   foreign,
