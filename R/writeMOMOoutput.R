@@ -72,9 +72,10 @@ writeMOMOoutput <- function(joinedOutput, dirs, output=NULL, emulateStata=TRUE) 
 
   trimDigits <- function(x) {
     for (i in 1:ncol(x)) {
-        if (class(x[,i])=="numeric") {
-            x[,i] <- signif(x[,i], 7)
-        }
+      # if (class(x[,i])=="numeric") {
+      if (inherits(x[,i], "numeric")) {
+        x[,i] <- signif(x[,i], 7)
+      }
     }
     x
   }

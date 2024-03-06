@@ -13,7 +13,8 @@ makeMOMOinput <- function(df, DoA, DoPR, hfile, country, source,
 	groups=NULL, models=rep("LINE_SIN", length(groups)), delayCorr=3, histPer=290,
 	compatibility.mode=FALSE) {
   # Checking arguments
-  if (class(df)!="data.frame")
+  # if (class(df)!="data.frame")
+  if (!inherits(df, "data.frame"))
     stop("Argument 'df' should be a data.frame.")
   if (length(source)!=1 || length(country)!=1)
     stop("Arguments 'country' and 'source' should be of length one.")
@@ -41,8 +42,9 @@ makeMOMOinput <- function(df, DoA, DoPR, hfile, country, source,
   names(df)[match(colnames, names(df))] <- c("DoD", "DoR", "age")
   if (!is.numeric(df$age))
     stop("In the supplied data.frame, the column for age is not numeric.")
-  if (class(df$DoD)!="Date" || class(df$DoR)!="Date")
-    stop(paste("In the supplied data.frame, the column for date of death",
+  # if (class(df$DoD)!="Date" || class(df$DoR)!="Date")
+  if (!inherits(df$DoD, "Date") || !inherits(df$DoR, "Date"))
+  stop(paste("In the supplied data.frame, the column for date of death",
       "and/or date of registration is not of class \"Date\".",
       "To avoid subtle errors, please explicitly convert them using as.Date().", sep="\n"))
   if (length(delayCorr)!=1 || !is.numeric(delayCorr) || is.na(delayCorr))
