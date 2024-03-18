@@ -14,7 +14,7 @@ CUSUMgraphsMOMO <- function(output, dirs, group=NA) {
   lapply(output, function(x) {
 
     final <- transferMOMOattributes(subset(x$finalDataset, season>=2006), x$finalDataset)
-    GROUP <- final$GROUP
+    GROUP <- unique(final$GROUP)
 
     final$Sweek[final$Sweek >= 27 & final$YoDi !=2010] <- final$Sweek[final$Sweek >= 27 & final$YoDi !=2010] + 1
     final$Sweek[final$WoDi == 53] <- 27

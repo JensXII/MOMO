@@ -18,7 +18,7 @@ fitGraphsMOMO <- function(output, dirs, group=NA) {
 
   lapply(output, function(x) {
     final <- x$finalDataset
-    GROUP <- final$GROUP
+    GROUP <- unique(final$GROUP)
 
     xwk <- with(final, (floor(min(wk)/50)*50):(ceiling(max(wk)/50)*50))
     xlabels <- as.character(final$wk2[match(xwk, as.integer(final$wk2))])
