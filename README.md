@@ -1,6 +1,16 @@
 # MOMOpack for R
 
-# News
+## MOMO 2024.06.04
+
+Using restricted cubic splines in the baseline estimation (not recommend)
+
+## MOMO 2024.03.18
+
+Corrections to accommodate Linux
+
+## MOMO 2023.05.08
+
+Exclusion of the COVID-19 pandemic years, 2020-2022, from baseline estimation
 
 ## MOMO 2023.05.08
 
