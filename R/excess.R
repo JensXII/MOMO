@@ -87,9 +87,9 @@ excessMOMO <- function(aggr, version, useAUTOMN, USEglm2, zvalue = 1.96) {
   }
 
   if (momoAttr$model=="SPLINE") {
-    m1 <- do.call(glmToUse, list(nbc ~ Swk1 + Swk2 + Swk3 + offset(log(N)), data=subset(aggr, CONDmodel==1), family=poisson))
+    m1 <- do.call(glmToUse, list(nbc ~ rms::rcs(wk, 3) + offset(log(N)), data=subset(aggr, CONDmodel==1), family=poisson))
     od <- max(1,sum(m1$weights * m1$residuals^2)/m1$df.r)
-    if (od > 1) m1 <- do.call(glmToUse, list(nbc ~ Swk1 + Swk2 + Swk3 + offset(log(N)), data=subset(aggr, CONDmodel==1), family=quasipoisson))
+    if (od > 1) m1 <- do.call(glmToUse, list(nbc ~ rms::rcs(wk, 3) + offset(log(N)), data=subset(aggr, CONDmodel==1), family=quasipoisson))
     aggr$Model <- "SPLINES"
   }
 
@@ -101,9 +101,9 @@ excessMOMO <- function(aggr, version, useAUTOMN, USEglm2, zvalue = 1.96) {
   }
 
   if (momoAttr$model=="SPLINE_SIN") {
-    m1 <- do.call(glmToUse, list(nbc ~ sin + cos + Swk1 + Swk2 + Swk3 + offset(log(N)), data=subset(aggr, CONDmodel==1), family=poisson))
+    m1 <- do.call(glmToUse, list(nbc ~ sin + cos + rms::rcs(wk, 3) + offset(log(N)), data=subset(aggr, CONDmodel==1), family=poisson))
     od <- max(1,sum(m1$weights * m1$residuals^2)/m1$df.r)
-    if (od > 1) m1 <- do.call(glmToUse, list(nbc ~ sin + cos + Swk1 + Swk2 + Swk3 + offset(log(N)), data=subset(aggr, CONDmodel==1), family=quasipoisson))
+    if (od > 1) m1 <- do.call(glmToUse, list(nbc ~ sin + cos + rms::rcs(wk, 3) + offset(log(N)), data=subset(aggr, CONDmodel==1), family=quasipoisson))
     aggr$Model <- "SPLINES_SIN"
   }
 
