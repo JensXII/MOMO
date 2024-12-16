@@ -44,7 +44,7 @@ glmnet removed from list of dependencies
 # How to install
 
 Please use package:
-```
+```{r eval = FALSE}
 devtools::install_github("JensXII/MOMO")
 ```
 
